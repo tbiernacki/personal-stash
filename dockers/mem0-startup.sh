@@ -13,8 +13,9 @@ ssh-keygen -A
 
 # 3. Clone mem0 repo if not exists
 cd /root/mem0
-if [ ! -d mem0 ]; then
-  git clone https://github.com/mem0ai/mem0.git repo
+folder="repo"
+if ! git clone "${url}" "${folder}" 2>/dev/null && [ -d "${folder}" ] ; then
+    echo "Clone failed because the folder ${folder} exists"
 fi
 
 # 4. Install Python requirements for server & openmemory
