@@ -21,8 +21,10 @@ REPO="https://github.com/mem0ai/mem0.git"
  chmod +x mem0-init.sh
  chmod +x webhook_receiver.py
 
+git config --global --add safe.directory /home/brovar/Docker/mem0/src
+
 echo " Syncing Mem0 repo…"
-if [ -d "/home/brovar/Docker/mem0/src/.git" ]; then
+if [ -d "/home/brovar/Docker/mem0/src/.git" ]; then    
     git -C "/home/brovar/Docker/mem0/src" fetch --depth 1 origin main
     git -C "/home/brovar/Docker/mem0/src" reset --hard origin/main
 else
