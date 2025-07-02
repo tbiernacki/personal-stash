@@ -30,6 +30,15 @@ else
     git clone --depth 1 "$REPO" "$CODE_DIR"
 fi
 
+# --- ensure psycopg2-binary is in server/requirements.txt -------------
+REQ_FILE="$CODE_DIR/server/requirements.txt"
+
+if ! grep -q "^psycopg2-binary" "$REQ_FILE"; then
+    echo "psycopg2-binary>=2.9.9" >> "$REQ_FILE"
+    echo "📦  Added psycopg2-binary to server/requirements.txt"
+fi
+# ----------------------------------------------------------------------
+
 echo " Ensuring buildx is ready…"
 docker buildx inspect default >/dev/null 2>&1 || docker buildx create --name mem0bx --use
 
