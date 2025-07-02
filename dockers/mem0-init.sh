@@ -12,7 +12,7 @@ ssh-keygen -A
 /usr/sbin/sshd
 
 # 3. Mem0 setup
-pip install fastapi uvicorn mem0ai qdrant-client
+pip install fastapi uvicorn mem0ai qdrant-client psycopg2
 uvicorn webhook_receiver:app --host 0.0.0.0 --port 8010
 
 # Tail logs or keep container alive)
