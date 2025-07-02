@@ -32,18 +32,16 @@ fi
 echo " Ensuring buildx is ready…"
 docker buildx inspect default >/dev/null 2>&1 || docker buildx create --name mem0bx --use
 
-echo " Building mem0_api_local (AMD64)…"
-docker buildx build \
-  --platform linux/amd64 \
-  --load \
-  -t mem0_api_local:latest \
-  "$CODE_DIR/server"
+echo "🐳  Building mem0_api_local (AMD64)…"
+docker buildx build --platform linux/amd64 --load \
+    -t mem0_api_local:latest "$CODE_DIR/server"
 
-echo " Building openmemory_local (AMD64)…"
-docker buildx build \
-  --platform linux/amd64 \
-  --load \
-  -t openmemory_local:latest \
-  "$CODE_DIR/openmemory"
+echo "🐳  Building openmemory_api_local (AMD64)…"
+docker buildx build --platform linux/amd64 --load \
+    -t openmemory_api_local:latest "$CODE_DIR/openmemory/api"
 
-echo " pre-deploy completed successfully."
+echo "🐳  Building openmemory_ui_local (AMD64)…"
+docker buildx build --platform linux/amd64 --load \
+    -t openmemory_ui_local:latest "$CODE_DIR/openmemory/ui"
+
+echo "✅  pre-deploy finished."
