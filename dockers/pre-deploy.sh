@@ -17,10 +17,10 @@ REPO="https://github.com/mem0ai/mem0.git"
 
  # Get init scripts for the Linux container
  wget -O mem0-init.sh https://raw.githubusercontent.com/tbiernacki/personal-stash/refs/heads/main/dockers/mem0-init.sh
- wget -O mem0-init-api.sh https://raw.githubusercontent.com/tbiernacki/personal-stash/refs/heads/main/dockers/mem0-api-init.sh
+ wget -O mem0-api-init.sh https://raw.githubusercontent.com/tbiernacki/personal-stash/refs/heads/main/dockers/mem0-api-init.sh
  wget -O webhook_receiver.py https://raw.githubusercontent.com/tbiernacki/personal-stash/refs/heads/main/dockers/webhook_receiver.py
  chmod +x mem0-init.sh
- chmod +x mem0-init-api.sh
+ chmod +x mem0-api-init.sh
  chmod +x webhook_receiver.py
 
 echo " Syncing Mem0 repo…"
