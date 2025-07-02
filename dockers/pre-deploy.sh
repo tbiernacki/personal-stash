@@ -1,16 +1,16 @@
+#!/usr/bin/env sh
 # pre-deploy – clone/pull Mem0 repo and build local images
 
-set -euo pipefail
-#                ^ exit on error, no unset vars, detect pipe errors
+# Fail fast on any error or unset var.
+set -eu
+# BusyBox dash doesn’t know -o pipefail; guard with 2>/dev/null
+(set -o pipefail) 2>/dev/null || true
 
-# ──────────────────────────────────────────────────────────────
-# Trap ERR so we can report what went wrong before the script quits
-# ──────────────────────────────────────────────────────────────
-trap 'echo " ERROR in ${BASH_SOURCE[0]} on line ${LINENO}: \
-command \`$BASH_COMMAND\` exited with code $?" >&2' ERR
-# If you use functions/sub-shells, also inherit the trap:
-shopt -s errtrace   # ensures ERR trap fires inside functions too
-# ──────────────────────────────────────────────────────────────
+#── Minimal, POSIX-safe ERR trap
+#   $LINENO is POSIX; $0 is script name.  We can’t print $BASH_COMMAND,
+#   but we still get line number & exit code.
+trap 'ec=$?; printf "❌  ERROR in %s at line %s (exit %s)\n" "$0" "$LINENO" "$ec" >&2' ERR
+#----------------------------------------------------------------------------
 
 CODE_DIR="/home/brovar/Docker/mem0/src"
 REPO="https://github.com/mem0ai/mem0.git"
