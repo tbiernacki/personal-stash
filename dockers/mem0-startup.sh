@@ -12,13 +12,13 @@ ssh-keygen -A
 /usr/sbin/sshd
 
 # 3. Clone mem0 repo if not exists
-cd /root
+cd /root/mem0
 if [ ! -d mem0 ]; then
-  git clone https://github.com/mem0ai/mem0.git
+  git clone https://github.com/mem0ai/mem0.git repo
 fi
 
 # 4. Install Python requirements for server & openmemory
-cd /root/mem0/server
+cd /root/mem0/repo/server
 pip install --upgrade pip
 pip install -r requirements.txt
 
@@ -30,11 +30,11 @@ pip install mem0ai qdrant-client
 
 # 6. Start both servers in background
 # MCP UI/API (OpenMemory)
-cd /root/mem0/openmemory
+cd /root/mem0/repo/openmemory
 uvicorn main:app --host 0.0.0.0 --port 8000 &
 
 # Mem0 API server
-cd /root/mem0/server
+cd /root/mem0/repo/server
 uvicorn main:app --host 0.0.0.0 --port 8001
 
 # (Optional: Tail logs or keep container alive)
